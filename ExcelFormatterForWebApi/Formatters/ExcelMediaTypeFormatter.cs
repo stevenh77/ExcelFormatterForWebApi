@@ -1,31 +1,26 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Web;
 
 namespace ExcelFormatterForWebApi.Formatters
 {
     public class ExcelMediaTypeFormatter : BufferedMediaTypeFormatter
     {
         private const string ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-        //private readonly Func<T, ExcelRow> builder;
-        //Func<T, ExcelRow> value
+
         public ExcelMediaTypeFormatter()
         {
-            //builder = value;
             SupportedMediaTypes.Add(new MediaTypeHeaderValue(ContentType));
             this.MediaTypeMappings.Add(new UriPathExtensionMapping("xlsx", ContentType));
         }
 
         public override bool CanWriteType(Type type)
         {
-            return true; // type == typeof(IQueryable<T>) || type == typeof(T);
+            return true;
         }
 
         public override bool CanReadType(Type type)
